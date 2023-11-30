@@ -16,12 +16,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Optional<Order> getOrderById(Integer id) {
-       return Optional.ofNullable(orderList.get(id));
+        return Optional.ofNullable(orderList.get(id));
     }
 
     @Override
     public List<Order> getAllOrders() {
-    return orderList;
+        return orderList;
     }
 
     @Override
@@ -31,8 +31,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void upgradeOrder(Integer id, Integer date) {
-     Order order =orderList.get(id);
-     order.setDate(date);
+        Order order = orderList.get(id);
+        order.setDate(date);
     }
 
     @Override
