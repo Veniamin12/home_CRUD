@@ -2,42 +2,41 @@ package com.example.home_crud.Service;
 
 
 import com.example.home_crud.DTO.Order;
+import com.example.home_crud.Repository.jdbc.OrderJDBCRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
-    private final List<Order> orderList = new ArrayList<>();
+
+    private final OrderJDBCRepository orderJDBCRepository;
 
     @Override
     public Optional<Order> getOrderById(Integer id) {
-        return Optional.ofNullable(orderList.get(id));
+        return Optional.ofNullable(orderJDBCRepository.getById(id));
     }
 
     @Override
     public List<Order> getAllOrders() {
-        return orderList;
+        return orderJDBCRepository.getAll();
     }
 
     @Override
     public void addOrder(Order order) {
-        orderList.add(order);
+        orderJDBCRepository.saveOrder(order);
     }
 
     @Override
-    public void upgradeOrder(Integer id, Integer date) {
-        Order order = orderList.get(id);
-        order.setDate(date);
+    public void upgradeOrder(Order order) {
+        orderJDBCRepository.updateById(order);
     }
 
     @Override
     public void dropOrder(Integer id) {
-        orderList.remove(id);
-
+        orderJDBCRepository.deleteById(id);
     }
 }

@@ -13,7 +13,7 @@ public interface OrderService {
 
     void addOrder(Order order);
 
-    void upgradeOrder(Integer id, Integer date);
+    void upgradeOrder(Order order);
 
     void dropOrder(Integer id);
 
