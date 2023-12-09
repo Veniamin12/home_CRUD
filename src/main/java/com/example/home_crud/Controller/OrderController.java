@@ -1,6 +1,7 @@
 package com.example.home_crud.Controller;
 
 import com.example.home_crud.DTO.Order;
+import com.example.home_crud.DTO.Product;
 import com.example.home_crud.Service.OrderService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -22,7 +23,7 @@ public class OrderController {
         return orderService.getOrderById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<Order> getAll() {
         return orderService.getAllOrders();
     }
@@ -33,10 +34,10 @@ public class OrderController {
         orderService.addOrder(order);
     }
 
-    @PutMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void updateOrder(@RequestBody Order order) {
-        orderService.upgradeOrder(order);
+    @PutMapping("/{orderId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateOrder(@PathVariable("orderId") Integer orderId, @RequestBody Order order) {
+        orderService.upgradeOrder(order, orderId);
     }
 
     @DeleteMapping("/delete/{id}")

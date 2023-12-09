@@ -2,6 +2,7 @@ package com.example.home_crud.Service;
 
 
 import com.example.home_crud.DTO.Order;
+import com.example.home_crud.DTO.Product;
 import com.example.home_crud.Repository.jdbc.OrderJDBCRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void upgradeOrder(Order order) {
-        orderJDBCRepository.updateById(order);
+    public void upgradeOrder(Order order, Integer id) {
+        orderJDBCRepository.updateById(order,id);
     }
 
     @Override
