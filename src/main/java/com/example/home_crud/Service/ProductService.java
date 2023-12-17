@@ -1,18 +1,18 @@
 package com.example.home_crud.Service;
 
-import com.example.home_crud.DTO.Product;
+import com.example.home_crud.DTO.ProductDto;
 
 import java.util.List;
 
 public interface ProductService {
 
-    Product getProductById(Integer id);
+    ProductDto getProductById(Integer id);
 
-    List<Product> getProducts();
+    List<ProductDto> getProducts();
 
-    void addProduct(Product product);
+    void addProduct(ProductDto productdto);
 
-    void updateProduct(Product product,Integer id);
+    void updateProduct(ProductDto productdto, Integer id);
 
     void dropProductById(Integer id);
 }

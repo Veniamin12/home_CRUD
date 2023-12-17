@@ -1,5 +1,6 @@
 package com.example.home_crud.Configuration;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -11,9 +12,9 @@ public class JDBCConfig {
 
     @Bean
     public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
+        dataSource.setJdbcUrl("jdbc:postgresql://localhost:5432/postgres");
         dataSource.setUsername("postgres");
         dataSource.setPassword("root");
         return dataSource;

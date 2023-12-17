@@ -1,13 +1,13 @@
 package com.example.home_crud.Repository.jdbc;
 
-import com.example.home_crud.DTO.Product;
-import com.example.home_crud.Repository.mappers.ProductRowMapper;
+import com.example.home_crud.DTO.ProductDto;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+/*
 @RequiredArgsConstructor
 @Repository
 public class ProductJDBCRepository {
@@ -25,21 +25,21 @@ public class ProductJDBCRepository {
     private final String DELETE_BY_ID_PRODUCT = "DELETE  FROM product\n" +
             "WHERE id= ";
 
-    public Product getById(Integer id) {
-        Product result = jdbcTemplate.queryForObject(SELECT_PRODUCT_BY_ID + id, new ProductRowMapper());
+    public ProductDto getById(Integer id) {
+        ProductDto result = jdbcTemplate.queryForObject(SELECT_PRODUCT_BY_ID + id, new ProductRowMapper());
         return result;
     }
 
-    public List<Product> getProducts() {
-        List<Product> productList = jdbcTemplate.query(SELECT_ALL_PRODUCT, new ProductRowMapper());
+    public List<ProductDto> getProducts() {
+        List<ProductDto> productList = jdbcTemplate.query(SELECT_ALL_PRODUCT, new ProductRowMapper());
         return productList;
     }
 
-    public void saveProduct(Product product) {
+    public void saveProduct(ProductDto product) {
         jdbcTemplate.update(SAVE_NEW_PRODUCT, product.getId(), product.getName(), product.getCost());
     }
 
-    public void upgradeProduct(Product product,Integer id) {
+    public void upgradeProduct(ProductDto product, Integer id) {
         jdbcTemplate.update(UPDATE_PRODUCT +id, product.getName(), product.getCost());
     }
 
@@ -47,3 +47,4 @@ public class ProductJDBCRepository {
         jdbcTemplate.update(DELETE_BY_ID_PRODUCT + id);
     }
 }
+*/

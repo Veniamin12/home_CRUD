@@ -11,10 +11,10 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order {
+public class OrderDto {
 
-    private Integer ID;
-    private Date date;
+    private Integer id;
+    private LocalDate date;
     private Double cost;
-    private List<Product> products;
+    private List<ProductDto> product;
 }

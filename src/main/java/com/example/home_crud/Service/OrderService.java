@@ -1,21 +1,19 @@
 package com.example.home_crud.Service;
 
-import com.example.home_crud.DTO.Order;
-import com.example.home_crud.DTO.Product;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.example.home_crud.DTO.OrderDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface OrderService {
 
-    Optional<Order> getOrderById(Integer id);
+    OrderDto getOrderById(Integer id);
 
-    List<Order> getAllOrders();
+    List<OrderDto> getAllOrders();
 
-    void addOrder(Order order);
+    void addOrder(OrderDto orderdto);
 
-    void upgradeOrder(Order order, Integer id);
+    void upgradeOrder(OrderDto orderdto, Integer id);
 
     void dropOrder(Integer id);
 

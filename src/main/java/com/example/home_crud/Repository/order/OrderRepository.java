@@ -1,0 +1,9 @@
+package com.example.home_crud.Repository.order;
+
+import com.example.home_crud.Model.Order;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface OrderRepository extends CrudRepository<Order, Integer> {
+}

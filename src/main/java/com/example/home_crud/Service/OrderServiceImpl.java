@@ -1,9 +1,10 @@
 package com.example.home_crud.Service;
 
 
-import com.example.home_crud.DTO.Order;
-import com.example.home_crud.DTO.Product;
-import com.example.home_crud.Repository.jdbc.OrderJDBCRepository;
+import com.example.home_crud.Converter.OrderConverter;
+import com.example.home_crud.DTO.OrderDto;
+import com.example.home_crud.Model.Order;
+import com.example.home_crud.Repository.order.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,30 +15,36 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderJDBCRepository orderJDBCRepository;
+    private final OrderRepository orderRepository;
+    private final OrderConverter orderConverter;
 
     @Override
-    public Optional<Order> getOrderById(Integer id) {
-        return Optional.ofNullable(orderJDBCRepository.getById(id));
+    public OrderDto getOrderById(Integer id) {
+        Order order = orderRepository.findById(id).orElseThrow();
+        return orderConverter.fromModel(order);
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderJDBCRepository.getAll();
+    public List<OrderDto> getAllOrders() {
+        Iterable<Order> orders = orderRepository.findAll();
+        return orderConverter.fromModel(orders);
     }
 
     @Override
-    public void addOrder(Order order) {
-        orderJDBCRepository.saveOrder(order);
+    public void addOrder(OrderDto orderdto) {
+        Order order = orderConverter.toModel(orderdto);
+        orderRepository.save(order);
     }
 
     @Override
-    public void upgradeOrder(Order order, Integer id) {
-        orderJDBCRepository.updateById(order,id);
+    public void upgradeOrder(OrderDto orderdto, Integer id) {
+        Order old = orderRepository.findById(id).orElseThrow();
+        Order updated = orderConverter.toModel(orderdto, old);
+        orderRepository.save(updated);
     }
 
     @Override
     public void dropOrder(Integer id) {
-        orderJDBCRepository.deleteById(id);
+        orderRepository.deleteById(id);
     }
 }

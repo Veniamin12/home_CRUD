@@ -1,16 +1,15 @@
 package com.example.home_crud.Repository.jdbc;
 
-import com.example.home_crud.DTO.Order;
-import com.example.home_crud.DTO.Product;
-import com.example.home_crud.Repository.mappers.OrderRowMapper;
+import com.example.home_crud.DTO.OrderDto;
+import com.example.home_crud.DTO.ProductDto;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-
+/*
 @Repository
 @RequiredArgsConstructor
 public class OrderJDBCRepository {
@@ -40,33 +39,33 @@ public class OrderJDBCRepository {
             "WHERE id= ";
 
 
-    public Order getById(int id) {
-        Order result = jdbcTemplate.queryForObject(SELECT_ORDER_BY_ID + id, new OrderRowMapper());
+    public OrderDto getById(int id) {
+        OrderDto result = jdbcTemplate.queryForObject(SELECT_ORDER_BY_ID + id, new OrderRowMapper());
         return result;
     }
 
-    public List<Order> getAll() {
-        List<Order> orderList = jdbcTemplate.query(SELECT_ALL_ORDERS, new OrderRowMapper());
+    public List<OrderDto> getAll() {
+        List<OrderDto> orderList = jdbcTemplate.query(SELECT_ALL_ORDERS, new OrderRowMapper());
         return orderList;
     }
 
-    public void saveOrder(Order order) {
-        jdbcTemplate.update(SAVE_ORDER, order.getID(), order.getDate(), order.getCost());
+    public void saveOrder(OrderDto order) {
+        jdbcTemplate.update(SAVE_ORDER, order.getId(), order.getDate(), order.getCost());
 
-        List<Product> products = order.getProducts();
+        List<ProductDto> products = order.getProduct();
         if (products != null && !products.isEmpty()) {
-            for (Product product : products) {
+            for (ProductDto product : products) {
                 jdbcTemplate.update(SAVE_PRODUCT, product.getId(), product.getName(), product.getCost());
             }
         }
     }
 
-    public void updateById(Order order, Integer id) {
+    public void updateById(OrderDto order, Integer id) {
         jdbcTemplate.update(UPDATE_ORDER +id, order.getDate(), order.getCost());
 
-        List<Product> products = order.getProducts();
+        List<ProductDto> products = order.getProduct();
         if (products != null && !products.isEmpty()) {
-            for (Product product : products) {
+            for (ProductDto product : products) {
                 jdbcTemplate.update(UPDATE_PRODUCT+id, product.getName(), product.getCost());
             }
         }
@@ -77,3 +76,4 @@ public class OrderJDBCRepository {
         jdbcTemplate.update(DELETE_BY_ID_PRODUCT + id);
     }
 }
+*/

@@ -5,14 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class ProductDto {
 
     private Integer id;
     private String name;

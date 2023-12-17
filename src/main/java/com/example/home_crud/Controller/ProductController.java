@@ -1,6 +1,6 @@
 package com.example.home_crud.Controller;
 
-import com.example.home_crud.DTO.Product;
+import com.example.home_crud.DTO.ProductDto;
 import com.example.home_crud.Service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,30 +10,30 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/v1/products")
 public class ProductController {
 
     private final ProductService productService;
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable("id") Integer id) {
+    public ProductDto getProductById(@PathVariable("id") Integer id) {
         return productService.getProductById(id);
     }
 
     @GetMapping()
-    public List<Product> getAllProducts() {
+    public List<ProductDto> getAllProducts() {
         return productService.getProducts();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveNewProduct(@RequestBody Product product) {
+    public void saveNewProduct(@RequestBody ProductDto product) {
         productService.addProduct(product);
     }
 
     @PutMapping("/{productId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateProductById(@PathVariable("productId") Integer productId, @RequestBody Product product) {
+    public void updateProductById(@PathVariable("productId") Integer productId, @RequestBody ProductDto product) {
         productService.updateProduct(product, productId);
     }
 
