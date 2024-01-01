@@ -1,10 +1,5 @@
 package com.example.home_crud.Repository.mappers;
 
-import com.example.home_crud.DTO.ProductDto;
-import org.springframework.jdbc.core.RowMapper;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 /*
 public class ProductRowMapper implements RowMapper<ProductDto> {
     @Override

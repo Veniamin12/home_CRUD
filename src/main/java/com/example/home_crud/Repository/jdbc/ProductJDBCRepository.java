@@ -1,12 +1,5 @@
 package com.example.home_crud.Repository.jdbc;
 
-import com.example.home_crud.DTO.ProductDto;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
 /*
 @RequiredArgsConstructor
 @Repository

@@ -1,6 +1,5 @@
 package com.example.home_crud.Model;
 
-import com.example.home_crud.DTO.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
