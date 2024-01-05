@@ -1,4 +1,4 @@
-package com.example.home_crud.Configuration;
+//package com.example.home_crud.Configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
