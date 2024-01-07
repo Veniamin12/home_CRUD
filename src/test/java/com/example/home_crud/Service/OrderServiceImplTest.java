@@ -1,7 +1,7 @@
 package com.example.home_crud.Service;
 
-import com.example.home_crud.Converter.OrderConverter;
 import com.example.home_crud.DTO.OrderDto;
+import com.example.home_crud.Mappers.OrderMapper;
 import com.example.home_crud.Model.Order;
 import com.example.home_crud.Repository.order.OrderRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +33,7 @@ class OrderServiceImplTest {
     private OrderRepository orderRepository;
 
     @Mock
-    private OrderConverter orderConverter;
+    private OrderMapper orderMapper;
 
     @Mock
     private Order order;
@@ -58,12 +58,12 @@ class OrderServiceImplTest {
     @Test
     void shouldGetOrderById() {
         when(orderRepository.findById(anyInt())).thenReturn(Optional.of(order));
-        when(orderConverter.fromModel(order)).thenReturn(orderDto);
+        when(orderMapper.fromModel(order)).thenReturn(orderDto);
 
         OrderDto result = testInstance.getOrderById(ORDER_ID);
 
         verify(orderRepository).findById(ORDER_ID);
-        verify(orderConverter).fromModel(order);
+        verify(orderMapper).fromModel(order);
         assertEquals(ORDER_ID, result.getId());
         assertNotNull(result);
     }
@@ -78,12 +78,12 @@ class OrderServiceImplTest {
     @Test
     void shouldGetAllOrders() {
         when(orderRepository.findAll()).thenReturn(orderList);
-        when(orderConverter.fromModel(orderList)).thenReturn(orderDtoList);
+        when(orderMapper.fromModel(orderList)).thenReturn(orderDtoList);
 
         List<OrderDto> result = testInstance.getAllOrders();
 
         verify(orderRepository).findAll();
-        verify(orderConverter).fromModel(orderList);
+        verify(orderMapper).fromModel(orderList);
         assertEquals(orderDtoList, result);
         assertNotNull(result);
 
@@ -102,11 +102,11 @@ class OrderServiceImplTest {
 
     @Test
     void shouldAddOrder() {
-        when(orderConverter.toModel(orderDto)).thenReturn(order);
+        when(orderMapper.toModel(orderDto)).thenReturn(order);
 
         testInstance.addOrder(orderDto);
 
-        verify(orderConverter).toModel(orderDto);
+        verify(orderMapper).toModel(orderDto);
         verify(orderRepository).save(order);
         assertNotNull(orderDto.getId());
     }
@@ -114,12 +114,12 @@ class OrderServiceImplTest {
     @Test
     void shouldUpgradeOrder() {
         when(orderRepository.findById(anyInt())).thenReturn(Optional.of(order));
-        when(orderConverter.toModel(orderDto, order)).thenReturn(order);
+        when(orderMapper.toModel(orderDto, order)).thenReturn(order);
 
         testInstance.upgradeOrder(orderDto, ORDER_ID);
 
         verify(orderRepository).findById(ORDER_ID);
-        verify(orderConverter).toModel(orderDto, order);
+        verify(orderMapper).toModel(orderDto, order);
         verify(orderRepository).save(order);
         assertNotNull(order.getCost());
     }
