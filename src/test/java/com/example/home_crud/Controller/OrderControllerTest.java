@@ -18,12 +18,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.http.client.support.BasicAuthenticationInterceptor;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,10 +83,23 @@ class OrderControllerTest {
     void shouldGetOrderById() {
         Order saveOrder = orderRepository.save(orderFirst);
 
-        OrderDto result = restTemplate.getForObject("http://localhost:" + port + "/api/v1/orders/" + saveOrder.getId(), OrderDto.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBasicAuth("testuser", "password");
+        HttpEntity<Object> entity = new HttpEntity<>(headers);
 
-        Assertions.assertEquals(saveOrder.getId(), result.getId());
-        Assertions.assertNotNull(result);
+        ResponseEntity<OrderDto> response = restTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/orders/" + saveOrder.getId(),
+                HttpMethod.GET,
+                entity,
+                OrderDto.class
+        );
+
+
+        //  OrderDto result = restTemplate.getForObject("http://localhost:" + port + "/api/v1/orders/" + saveOrder.getId(), OrderDto.class);
+
+        Assertions.assertEquals(saveOrder.getId(), response.getBody().getId());
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertNotNull(response);
     }
 
     @Test

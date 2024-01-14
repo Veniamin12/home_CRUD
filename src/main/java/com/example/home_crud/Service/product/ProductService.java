@@ -1,4 +1,4 @@
-package com.example.home_crud.Service;
+package com.example.home_crud.Service.product;
 
 import com.example.home_crud.DTO.ProductDto;
 

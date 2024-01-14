@@ -1,4 +1,4 @@
-package com.example.home_crud.Service;
+package com.example.home_crud.Service.order;
 
 import com.example.home_crud.DTO.OrderDto;
 

@@ -1,9 +1,10 @@
-package com.example.home_crud.Service;
+package com.example.home_crud.Service.product;
 
 import com.example.home_crud.DTO.ProductDto;
 import com.example.home_crud.Mappers.ProductMapper;
 import com.example.home_crud.Model.Product;
 import com.example.home_crud.Repository.product.ProductRepository;
+import com.example.home_crud.Service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

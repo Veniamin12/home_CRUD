@@ -1,7 +1,7 @@
 package com.example.home_crud.Controller;
 
 import com.example.home_crud.DTO.ProductDto;
-import com.example.home_crud.Service.ProductService;
+import com.example.home_crud.Service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

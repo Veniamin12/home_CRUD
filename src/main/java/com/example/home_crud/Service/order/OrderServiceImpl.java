@@ -1,10 +1,11 @@
-package com.example.home_crud.Service;
+package com.example.home_crud.Service.order;
 
 
 import com.example.home_crud.DTO.OrderDto;
 import com.example.home_crud.Mappers.OrderMapper;
 import com.example.home_crud.Model.Order;
 import com.example.home_crud.Repository.order.OrderRepository;
+import com.example.home_crud.Service.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
