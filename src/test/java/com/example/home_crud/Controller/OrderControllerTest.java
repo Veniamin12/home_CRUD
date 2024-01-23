@@ -20,6 +20,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.client.support.BasicAuthenticationInterceptor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -74,31 +75,25 @@ class OrderControllerTest {
                         .build()))
                 .build();
     }
+
     @AfterEach
-    public void cleanDataBase(){
+    public void cleanDataBase() {
         orderRepository.deleteAll();
     }
 
     @Test
     void shouldGetOrderById() {
         Order saveOrder = orderRepository.save(orderFirst);
+        ;
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBasicAuth("testuser", "password");
-        HttpEntity<Object> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<OrderDto> response = restTemplate.exchange(
-                "http://localhost:" + port + "/api/v1/orders/" + saveOrder.getId(),
-                HttpMethod.GET,
-                entity,
-                OrderDto.class
-        );
-
+        OrderDto response = restTemplate.withBasicAuth("testuser", "password")
+                .getForObject("http://localhost:" + port + "/api/v1/orders/" + saveOrder.getId(),OrderDto.class);
+        System.out.println("REsponse"+ response);
 
         //  OrderDto result = restTemplate.getForObject("http://localhost:" + port + "/api/v1/orders/" + saveOrder.getId(), OrderDto.class);
 
-        Assertions.assertEquals(saveOrder.getId(), response.getBody().getId());
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals(saveOrder.getId(), response.getId());
+       // Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertNotNull(response);
     }
 

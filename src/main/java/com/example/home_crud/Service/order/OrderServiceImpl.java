@@ -7,6 +7,7 @@ import com.example.home_crud.Model.Order;
 import com.example.home_crud.Repository.order.OrderRepository;
 import com.example.home_crud.Service.order.OrderService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

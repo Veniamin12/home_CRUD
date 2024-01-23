@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <property name="Home_CRUD" value="@project.artifactId@" />
+    <property name="APPLICATION_GROUP" value="My Group" />
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%date{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%22.22thread] %boldGreen(%60.60(%40.40class{39}.%method)):%5line ~ %boldCyan(%message%n)}" />
+    <!--    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%date{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%22.22thread] %boldGreen(%60.60(%40.40class{39}.%method)):%5line ~ %boldCyan(%message%n)}" />-->
+    <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{${LOG_DATE_FORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+    <property name="LOG_FILE" value="src/main/resources/crud_   microservice.log" />
+
+    <!--    default config for all microservices-->
+    <logger name="com.company.juniorcrudservice.JuniorCrudServiceApplication" level="INFO" />
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR" />
+    <logger name="org.apache.catalina.util.LifecycleBase" level="ERROR" />
+    <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN" />
+    <logger name="org.apache.sshd.common.util.SecurityUtils" level="WARN" />
+    <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN" />
+    <logger name="org.graylog2" level="ERROR" />
+    <logger name="org.hibernate.validator.internal.util.Version" level="WARN" />
+    <logger name="org.springframework.boot.StartupInfoLogger" level="INFO" />
+    <logger name="org.springframework.context.support.AbstractApplicationContext" level="INFO" />
+    <logger name="org.graylog2.gelfclient.transport.GelfTcpTransport" level="ERROR" additivity="false" />
+
+    <!--    custom config for microservices-->
+    <logger name="com.example.home_crud.Controller.OrderController" level="DEBUG" />
+    <logger name="com.example.home_crud.Controller.ProductController" level="DEBUG" />
+    <logger name="com.example.home_crud.Controller.AuthController" level="DEBUG" />
+
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY:-9}</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <root level="${ROOT_LEVEL:-ERROR}">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+
+    <logger name="com.company" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <logger name="org.graylog2.gelfclient.transport.GelfTcpTransport" level="ERROR" additivity="false" />
+
+</configuration>

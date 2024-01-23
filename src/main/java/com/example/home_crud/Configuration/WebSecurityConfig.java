@@ -49,13 +49,13 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-    @Autowired
+     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Autowired
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("testuser")
                 .password(passwordEncoder().encode("password"))
