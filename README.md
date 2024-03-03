@@ -1,8 +1,12 @@
 # junior-crud-service
+#### This is my home CRUD project with many modern and defferent technologies
+
+
 
 #### for local start 
 - active profile "default"
-- postgresDB run from Docker
+- run docker-compose.yml, button services
+
 
 #### Get Order example curl 
 ````

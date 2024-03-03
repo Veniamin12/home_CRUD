@@ -1,6 +1,8 @@
+
+
 FROM maven:3.8.4 AS build
-COPY ../src /app/src
-COPY ../pom.xml /app
+COPY src /app/src
+COPY pom.xml /app
 RUN mvn -q -f /app/pom.xml clean package -DskipTests
 
 #Use official image java for launch app
